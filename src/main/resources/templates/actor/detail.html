@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('ACTOR DETAIL')">
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 th:utext="#{actor.detail.title}">actor.detail.title</h1>
+    </div>
+
+    <div th:replace="_temp :: nav"></div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table" th:object="${actor}">
+          <tr>
+            <th th:utext="#{actor.id}">id</th>
+            <td th:text="*{id}"></td>
+          </tr>
+          <tr>
+            <th th:utext="#{actor.first_name}">first_name</th>
+            <td th:text="*{first_name}"></td>
+          </tr>
+          <tr>
+            <th th:utext="#{actor.last_name">last_name"</th>
+            <td th:text="*{last_name}"></td>
+          </tr>
+          <tr>
+            <th th:utext="#{actor.film_info}">film_info</th>
+            <td th:text="*{film_info}"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="_temp :: footer"></div>
+  </div>
+
+  <div th:include="_temp :: script"></div>
+</body>
+</html>

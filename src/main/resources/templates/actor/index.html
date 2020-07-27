@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('ACTOR')">
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 th:utext="#{actor.index.title}">actor.index.title</h1>
+      <p th:if="${emptyMessage}" th:text="${emptyMessage}">empty message</p>
+      <p th:if="${errorMessage}" th:text="${errorMessage}">error message</p>
+      <p th:if="${deleteMessage}" th:text="${deleteMessage}">delete message</p>
+    </div>
+
+    <div th:replace="_temp :: nav"></div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <form action="/actor/search" th:action="@{/actor/search}" method="get">
+          <div class="input-group">
+            <input type="text" name="keyword" class="form-control" placeholder="Search for..." />
+            <span class="input-group-btn">
+              <input class="btn btn-default" type="submit" value="Search!" />
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th th:utext="#{actor.id}">id</th>
+              <th th:utext="#{actor.first_name}">first_name</th>
+              <th th:utext="#{actor.last_name}">last_name</th>
+              <th th:utext="#{actor.film_info}">film_info</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="item,iterStat : ${list}">
+              <td>
+                <a class="btn btn-default" href="/actor/${item.actor_id}" th:href="@{/actor/{id}(id=${item.actor_id})}" th:text="${item.actor_id}">1</a>
+              </td>
+              <td th:text="${item.first_name != null}? ${item.first_name } : '-'">1</td>
+              <td th:text="${item.last_name!= null}? ${item.last_name} : '-'">1</td>
+              <td th:text="${item.film_info}">1</td>
+              <td>
+                <a class="btn btn-warning" href="/actor/delete/${item.actor_id}" th:href="@{/actor/delete/{id}(id=${item.actor_id})}" th:text="#{actor.delete}"></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="_temp :: footer"></div>
+  </div>
+
+  <div th:include="_temp :: script"></div>
+</body>
+</html>
